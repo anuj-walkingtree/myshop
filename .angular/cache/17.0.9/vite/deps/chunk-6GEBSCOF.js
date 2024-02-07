@@ -29,18 +29,18 @@ import {
   TemplateRef,
   Version,
   ViewContainerRef,
-  __spreadProps,
-  __spreadValues,
   booleanAttribute,
   createNgModule,
   findLocaleData,
   formatRuntimeError,
+  getLocaleCurrencyCode,
   getLocalePluralCase,
   inject,
   isPromise,
   isSubscribable,
   numberAttribute,
   performanceMarkFeature,
+  registerLocaleData,
   setClassMetadata,
   stringify,
   untracked,
@@ -56,7 +56,11 @@ import {
   ɵɵinject,
   ɵɵinjectAttribute,
   ɵɵstyleProp
-} from "./chunk-THWPMT2E.js";
+} from "./chunk-RD5CTG73.js";
+import {
+  __spreadProps,
+  __spreadValues
+} from "./chunk-4WX7ZCK5.js";
 
 // node_modules/@angular/common/fesm2022/common.mjs
 var _DOM = null;
@@ -846,6 +850,14 @@ function getLocaleEraNames(locale, width) {
   const erasData = data[LocaleDataIndex.Eras];
   return getLastDefinedValue(erasData, width);
 }
+function getLocaleFirstDayOfWeek(locale) {
+  const data = findLocaleData(locale);
+  return data[LocaleDataIndex.FirstDayOfWeek];
+}
+function getLocaleWeekEndRange(locale) {
+  const data = findLocaleData(locale);
+  return data[LocaleDataIndex.WeekendRange];
+}
 function getLocaleDateFormat(locale, width) {
   const data = findLocaleData(locale);
   return getLastDefinedValue(data[LocaleDataIndex.DateFormat], width);
@@ -874,6 +886,17 @@ function getLocaleNumberSymbol(locale, symbol) {
 function getLocaleNumberFormat(locale, type) {
   const data = findLocaleData(locale);
   return data[LocaleDataIndex.NumberFormats][type];
+}
+function getLocaleCurrencySymbol(locale) {
+  const data = findLocaleData(locale);
+  return data[LocaleDataIndex.CurrencySymbol] || null;
+}
+function getLocaleCurrencyName(locale) {
+  const data = findLocaleData(locale);
+  return data[LocaleDataIndex.CurrencyName] || null;
+}
+function getLocaleCurrencyCode2(locale) {
+  return getLocaleCurrencyCode(locale);
 }
 function getLocaleCurrencies(locale) {
   const data = findLocaleData(locale);
@@ -911,6 +934,10 @@ function getLocaleExtraDayPeriods(locale, formStyle, width) {
   ]];
   const dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
   return getLastDefinedValue(dayPeriods, width) || [];
+}
+function getLocaleDirection(locale) {
+  const data = findLocaleData(locale);
+  return data[LocaleDataIndex.Directionality];
 }
 function getLastDefinedValue(data, index) {
   for (let i = index; i > -1; i--) {
@@ -1870,6 +1897,9 @@ var NgLocaleLocalization = _NgLocaleLocalization;
     }]
   }], null);
 })();
+function registerLocaleData2(data, localeId, extraData) {
+  return registerLocaleData(data, localeId, extraData);
+}
 function parseCookieValue(cookieStr, name) {
   name = encodeURIComponent(name);
   for (const cookie of cookieStr.split(";")) {
@@ -3601,8 +3631,19 @@ var CommonModule = _CommonModule;
 })();
 var PLATFORM_BROWSER_ID = "browser";
 var PLATFORM_SERVER_ID = "server";
+var PLATFORM_WORKER_APP_ID = "browserWorkerApp";
+var PLATFORM_WORKER_UI_ID = "browserWorkerUi";
+function isPlatformBrowser(platformId) {
+  return platformId === PLATFORM_BROWSER_ID;
+}
 function isPlatformServer(platformId) {
   return platformId === PLATFORM_SERVER_ID;
+}
+function isPlatformWorkerApp(platformId) {
+  return platformId === PLATFORM_WORKER_APP_ID;
+}
+function isPlatformWorkerUi(platformId) {
+  return platformId === PLATFORM_WORKER_UI_ID;
 }
 var VERSION = new Version("17.0.8");
 var _ViewportScroller = class _ViewportScroller {
@@ -3723,6 +3764,34 @@ function findAnchorFromDocument(document, target) {
   }
   return null;
 }
+var NullViewportScroller = class {
+  /**
+   * Empty implementation
+   */
+  setOffset(offset) {
+  }
+  /**
+   * Empty implementation
+   */
+  getScrollPosition() {
+    return [0, 0];
+  }
+  /**
+   * Empty implementation
+   */
+  scrollToPosition(position) {
+  }
+  /**
+   * Empty implementation
+   */
+  scrollToAnchor(anchor) {
+  }
+  /**
+   * Empty implementation
+   */
+  setHistoryScrollRestoration(scrollRestoration) {
+  }
+};
 var XhrFactory = class {
 };
 function getUrl(src, win) {
@@ -4652,17 +4721,99 @@ export {
   setRootDomAdapter,
   DomAdapter,
   DOCUMENT,
+  PlatformLocation,
   LOCATION_INITIALIZED,
+  BrowserPlatformLocation,
+  normalizeQueryParams,
   LocationStrategy,
+  APP_BASE_HREF,
   PathLocationStrategy,
   HashLocationStrategy,
   Location,
+  NumberFormatStyle,
+  Plural,
+  FormStyle,
+  TranslationWidth,
+  FormatWidth,
+  NumberSymbol,
+  WeekDay,
+  getLocaleId,
+  getLocaleDayPeriods,
+  getLocaleDayNames,
+  getLocaleMonthNames,
+  getLocaleEraNames,
+  getLocaleFirstDayOfWeek,
+  getLocaleWeekEndRange,
+  getLocaleDateFormat,
+  getLocaleTimeFormat,
+  getLocaleDateTimeFormat,
+  getLocaleNumberSymbol,
+  getLocaleNumberFormat,
+  getLocaleCurrencySymbol,
+  getLocaleCurrencyName,
+  getLocaleCurrencyCode2 as getLocaleCurrencyCode,
+  getLocalePluralCase2 as getLocalePluralCase,
+  getLocaleExtraDayPeriodRules,
+  getLocaleExtraDayPeriods,
+  getLocaleDirection,
+  getCurrencySymbol,
+  getNumberOfCurrencyDigits,
+  formatDate,
+  formatCurrency,
+  formatPercent,
+  formatNumber,
+  NgLocalization,
+  NgLocaleLocalization,
+  registerLocaleData2 as registerLocaleData,
   parseCookieValue,
+  NgClass,
+  NgComponentOutlet,
+  NgForOfContext,
+  NgForOf,
+  NgIf,
+  NgIfContext,
+  NgSwitch,
+  NgSwitchCase,
+  NgSwitchDefault,
+  NgPlural,
+  NgPluralCase,
+  NgStyle,
+  NgTemplateOutlet,
+  AsyncPipe,
+  LowerCasePipe,
+  TitleCasePipe,
+  UpperCasePipe,
+  DATE_PIPE_DEFAULT_TIMEZONE,
+  DATE_PIPE_DEFAULT_OPTIONS,
+  DatePipe,
+  I18nPluralPipe,
+  I18nSelectPipe,
+  JsonPipe,
+  KeyValuePipe,
+  DecimalPipe,
+  PercentPipe,
+  CurrencyPipe,
+  SlicePipe,
   CommonModule,
   PLATFORM_BROWSER_ID,
+  PLATFORM_SERVER_ID,
+  PLATFORM_WORKER_APP_ID,
+  PLATFORM_WORKER_UI_ID,
+  isPlatformBrowser,
   isPlatformServer,
+  isPlatformWorkerApp,
+  isPlatformWorkerUi,
+  VERSION,
   ViewportScroller,
-  XhrFactory
+  NullViewportScroller,
+  XhrFactory,
+  IMAGE_LOADER,
+  provideCloudflareLoader,
+  provideCloudinaryLoader,
+  provideImageKitLoader,
+  provideImgixLoader,
+  PRECONNECT_CHECK_BLOCKLIST,
+  NgOptimizedImage
 };
 /*! Bundled license information:
 
@@ -4673,4 +4824,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-2Q5BBGNX.js.map
+//# sourceMappingURL=chunk-6GEBSCOF.js.map
