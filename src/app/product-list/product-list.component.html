@@ -1,26 +1,23 @@
-<h2>Products</h2>
+<div class="main-div">
 
-<div *ngFor="let product of products">
-    
-    <h3>
-        <a
-          [title]="product.name + ' details'"
-          [routerLink]="['/products', product.id]">
-          {{ product.name }}
-        </a>
-      </h3>
-
-  <p *ngIf="product.description">
-    Description: {{ product.description }}
-  </p>
-
-  <button type="button" (click)="share()">
-    Share
-  </button>
+  <h2>Products</h2>
   
-  <app-product-alerts
-    [product]="product" 
-    (notify)="onNotify()">
-  </app-product-alerts>
-
+  <div class="product-list">
+    <div class="product-card" *ngFor="let product of products">
+      <div class="card-content">
+        <h3>
+          <a [title]="product.name + ' details'" [routerLink]="['/products', product.id]" class="text-align-center">
+            {{ product.name }}
+          </a>
+        </h3>
+        <p *ngIf="product.description">Description: {{ product.description }}</p>
+        <img src="{{ product.image }}" alt="{{ product.name }}">
+      </div>
+      <div class="button-row">
+        <button type="button" (click)="share()" class="share-btn">Share</button>
+        <app-product-alerts [productData]="product" (notifyAlert)="onNotify()"></app-product-alerts>
+      </div>
+    </div>
+  </div>
+  
 </div>

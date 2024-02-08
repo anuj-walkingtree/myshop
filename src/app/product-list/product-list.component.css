@@ -1,7 +1,46 @@
+.main-div{
+margin: 0 20px;
+}
 
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
-*/
+.product-card {
+  width: 250px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column; /* Arrange card content in a column */
+}
+
+.card-content {
+  flex-grow: 1; /* Allow the card content to expand */
+}
+
+.product-card h3 {
+  /* margin-top: 200px; */
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between; /* Align buttons in a row with space between them */
+}
+
+.share-btn {
+    width: auto;
+    padding:12px 30px;
+  margin: 14px 5px 0 0; /* Add some spacing between buttons */
+  height: 36px;
+}

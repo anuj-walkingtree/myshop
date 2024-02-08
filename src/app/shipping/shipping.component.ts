@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { CartService } from '../cart.service';
-import { CurrencyPipe } from '@angular/common'; // Import CurrencyPipe if not already imported
+// import { CurrencyPipe } from '@angular/common'; // Import CurrencyPipe if not already imported
 
 @Component({
   selector: 'app-shipping',
@@ -11,11 +11,12 @@ import { CurrencyPipe } from '@angular/common'; // Import CurrencyPipe if not al
 })
 export class ShippingComponent {
 
-  constructor(private cartService: CartService, private currencyPipe: CurrencyPipe) { }
+  constructor(private cartService: CartService) { }
 
   shippingCosts!: Observable<{ type: string, price: number }[]>;
 
   ngOnInit(): void {
+    console.log("dcsdcsdddddddddddddddddd");
     this.shippingCosts =  this.cartService.getShippingPrices();
   }
 
